@@ -21,6 +21,7 @@ CrestListPage::~CrestListPage()
 
 void CrestListPage::populateGrid(){
     std::vector<Crest> crests = Crest::loadCrests("C:/QT Projects/TestHeroPage/PredResourceFiles/Crests.json");
+
     int row = 0, col = 0;
     const int columns = 5;
 

@@ -4,17 +4,12 @@
 #include <QScrollArea>
 #include <QVBoxLayout>
 #include "FunctionalClasses.h"
-#include "crest.h"
 HeroListPage::HeroListPage(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::HeroListPage)
 {
     ui->setupUi(this);
     populateGrid();
-    std::vector<Crest> crests = Crest::loadCrests("C:/QT Projects/TestHeroPage/PredResourceFiles/Crests.json");
-    for(const Crest& crest: crests){
-        qDebug() << "Name: " << crest.m_name;
-    }
 }
 
 HeroListPage::~HeroListPage()
@@ -51,6 +46,7 @@ void HeroListPage::populateGrid() {
         // Load the image
         QString heroName = heroList[i];
         QString imagePath = "C:/QT Projects/TestHeroPage/HeroListImages/" + heroName + ".jpg";
+
         QPixmap heroPixmap(imagePath);
 
         if (!heroPixmap.isNull()) {
