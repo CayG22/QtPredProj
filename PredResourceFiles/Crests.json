@@ -1,0 +1,156 @@
+[
+    {
+        "name": "Judgement",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Judgement.jpg",
+        "physical_power": 12,
+        "max_health": 100,
+        "omnivamp": 0.04
+    },
+    {
+        "name" : "Saphir's Mantle",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/SaphirsMantle.jpg",
+        "max_health" : 180,
+        "physical_armor" : 8,
+        "magical_armor" : 5
+    },
+    {
+        "name" : "Razorback",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Razorback.jpg",
+        "physical_power" : 8,
+        "magical_armor" : 5
+    },
+    {
+        "name": "Tranquility",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Tranquility.jpg",
+        "max_health" : 100,
+        "mana_regeneration": 0.4
+    },
+    {
+        "name": "Silentium",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Silentium.jpg",
+        "max_health" : 100,
+        "mana_regeneration" : 0.4
+    },
+    {
+        "name" : "Sanctification",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Sanctification.jpg",
+        "max_health" : 120,
+        "health_regeneration" : 0.5
+    },
+    {
+        "name" : "Rift Walkers",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/RiftWalkers.jpg",
+        "max_health" : 120,
+        "health_regeneration" : 0.5
+    },
+    {
+        "name" : "Reclamation",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Reclamation.jpg",
+        "max_health" : 100,
+        "health_regeneration" : 0.4
+    },
+    {
+        "name" : "Leafsong",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Leafsong.jpg",
+        "max_health" : 120,
+        "health_regeneration" : 0.5
+    },
+    {
+        "name" : "Typhoon",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Typhoon.jpg",
+        "magical_power" : 25,
+        "max_health" : 100,
+        "ability_haste" : 8
+    },
+    {
+        "name" : "Time-Flux Band",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/TimeFluxBand.jpg",
+        "magical_power" : 25,
+        "max_mana" : 200,
+        "ability_haste" : 8
+    },
+    {
+        "name" : "Tempest",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Tempest.jpg",
+        "magical_power" : 25,
+        "max_health" : 100,
+        "ability_haste" : 8
+    },
+    {
+        "name" : "Soulbearer",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Soulbearer.jpg",
+        "magical_power" : 25,
+        "max_health" : 200,
+        "ability_haste" : 8
+    },
+    {
+        "name" : "Obelisk",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Obelisk.jpg",
+        "magical_power" : 25,
+        "max_health" : 100,
+        "ability_haste" : 8
+    },
+    {
+        "name" : "Epoch",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Epoch.jpg",
+        "magical_power" : 25,
+        "max_mana" : 200,
+        "ability_haste" : 8
+    },
+    {
+        "name" : "Iceskorn Talons",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/IceskornTalons.jpg",
+        "physical_power" : 12,
+        "max_health" : 100,
+        "omnivamp" : 0.04
+    },
+    {
+        "name" : "Brutallax",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Brutallax.jpg",
+        "physical_power" : 12,
+        "max_health" : 100,
+        "omnivamp" : 0.04
+    },
+    {
+        "name" : "Pacifier",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Pacifier.jpg",
+        "physical_power" : 10,
+        "attack_speed" : 0.15,
+        "omnivamp" : 0.07
+    },
+    {
+        "name" : "Liberator",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Liberator.jpg",
+        "physical_power" : 10,
+        "attack_speed" : 0.15,
+        "omnivamp" : 0.07
+    },
+    {
+        "name" : "Eviscerator",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Eviscerator.jpg",
+        "physical_power" : 10,
+        "attack_speed" : 0.15,
+        "omnivamp" : 0.07
+    },
+    {
+        "name" : "Witchstalker",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Witchstalker.jpg",
+        "physical_power" : 12,
+        "physical_penatration" : 5,
+        "ability_haste" : 8
+    },
+    {
+        "name" : "Ortus",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Ortus.jpg",
+        "physical_power" : 12,
+        "physical_penatration" : 5,
+        "ability_haste" : 8
+    },
+    {
+        "name" : "Nex",
+        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Nex.jpg",
+        "physical_power" : 12,
+        "physical_penatration" : 5,
+        "ability_haste" : 8
+    }
+]
