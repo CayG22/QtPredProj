@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     //MainWindow w;
-    itemlistpage w;
+    CrestListPage w;
     w.show();
     qDebug() << "Current Path:" << QDir::currentPath();
     return a.exec();

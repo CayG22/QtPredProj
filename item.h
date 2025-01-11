@@ -64,6 +64,7 @@ public:
     double m_movement_speed;
 
     static std::vector<Item> loadItems(const QString& filePath);
+    static QString createImagePath(const QString& name);
 };
 
 #endif // ITEM_H

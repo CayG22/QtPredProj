@@ -65,7 +65,7 @@ public:
     double m_movement_speed;
 
     static std::vector<Crest> loadCrests(const QString& filePath);
-
+    static QString createImagePath(const QString& name);
 };
 
 #endif // CREST_H

@@ -1,7 +1,7 @@
 [
     {
         "name": "Judgement",
-        "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/Judgement.jpg",
+        "image_path" : ":/CrestImages/Judgement.jpg",
         "physical_power": 12,
         "max_health": 100,
         "omnivamp": 0.04

@@ -41,3 +41,9 @@ std::vector<Crest> Crest::loadCrests(const QString& filePath){
     }
     return crests;
 }
+QString Crest::createImagePath(const QString& name){
+    QString non_const_copy = name;
+    non_const_copy.remove(' ');
+    QString img_path = ":/images/CrestImages/" + name + ".jpg";
+    return img_path;
+}

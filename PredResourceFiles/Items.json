@@ -37,14 +37,14 @@
         "movement_speed":0.03  
     },
     {
-        "name":"Vanguardian",
+        "name":"Vangaurdian",
         "image_path":"",
         "physical_armor":35,
         "magical_armor":35,
         "tenacity":0.2
     },
     {
-        "name":"Hexbound Bracer",
+        "name":"Hexbound Bracers",
         "image_path":"",
         "physical_armor":45,
         "health_regeneration":0.125,
@@ -310,14 +310,14 @@
         "max_mana":250
     },
     {
-        "name":"Giant's Ring",
+        "name":"Giants Ring",
         "image_path":"",
         "max_health":300,
         "physical_power":45,
         "ability_haste":20
     },
     {
-        "name":"Golem's Gift",
+        "name":"Golems Gift",
         "image_path":"",
         "magical_power":70,
         "physical_armor":35,
@@ -346,7 +346,7 @@
         "critical_chance":0.2
     },
     {
-        "name":"Tainted Guard",
+        "name":"Tainted Gaurd",
         "image_path":"",
         "max_health":300,
         "physical_armor":45,
@@ -473,7 +473,7 @@
         "ability_haste":20
     },
     {
-        "name":"Berserker's Axe",
+        "name":"Berserkers Axe",
         "image_path":"",
         "physical_power":40,
         "max_health":300,
@@ -531,7 +531,7 @@
         "movement_speed":0.05
     },
     {
-        "name":"Warden's Faith",
+        "name":"Wardens Faith",
         "image_path":"",
         "max_health":300,
         "physical_armor":70
@@ -571,7 +571,7 @@
         "tenacity":0.2
     },
     {
-        "name":"Rainment of Renewal",
+        "name":"Raiment Of Renewel",
         "image_path":"",
         "max_health":600,
         "health_regeneration":0.5,
@@ -665,7 +665,7 @@
         "tenacity":0.2
     },
     {
-        "name":"The Perforator",
+        "name":"Perforator",
         "image_path":"",
         "physical_power":40,
         "physical_penatration":6,

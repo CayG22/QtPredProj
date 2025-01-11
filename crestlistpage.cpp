@@ -20,7 +20,7 @@ CrestListPage::~CrestListPage()
 }
 
 void CrestListPage::populateGrid(){
-    std::vector<Crest> crests = Crest::loadCrests("C:/QT Projects/TestHeroPage/PredResourceFiles/Crests.json");
+    std::vector<Crest> crests = Crest::loadCrests(":/JSON/PredResourceFiles/Crests.json");
 
     int row = 0, col = 0;
     const int columns = 5;
@@ -36,7 +36,9 @@ void CrestListPage::populateGrid(){
         //TODO:: ADD NAMES TO ALSO DISPLAY ON THIS PAGE
 
         //Load image
-        QPixmap pixmap(crest.m_image_path);
+        QString image_path = Crest::createImagePath(crest.m_name);
+        qDebug() << image_path;
+        QPixmap pixmap(image_path);
         crestLabel->setPixmap(pixmap.scaled(128,128, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         gridLayout->addWidget(crestLabel,row,col);
         //Connect call will go here...
