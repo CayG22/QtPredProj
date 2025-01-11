@@ -40,7 +40,7 @@ void itemlistpage::populateGrid(){
         QString image_path = Item::createImagePath(item.m_name);
         qDebug() << image_path;
         QPixmap pixmap(image_path);
-        if(!pixmap.isNull()){
+        if(!pixmap.isNull() || pixmap.isNull()){
         itemLabel->setPixmap(pixmap.scaled(128,128,Qt::KeepAspectRatio,Qt::SmoothTransformation));
         gridLayout->addWidget(itemLabel,row,col);
         }else{

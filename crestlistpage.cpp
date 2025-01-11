@@ -2,6 +2,7 @@
 #include<QScrollArea>
 #include<QVBoxLayout>
 #include<QLabel.h>
+
 #include "crestlistpage.h"
 #include "ui_crestlistpage.h"
 #include "crest.h"
@@ -29,7 +30,7 @@ void CrestListPage::populateGrid(){
     QWidget* gridWidget = new QWidget();
     QGridLayout* gridLayout = new QGridLayout(gridWidget);
 
-    for(const Crest& crest: crests){
+    for(Crest& crest: crests){
         //Create a clickable label
         ClickableLabel *crestLabel = new ClickableLabel();
         crestLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -39,9 +40,27 @@ void CrestListPage::populateGrid(){
         QString image_path = Crest::createImagePath(crest.m_name);
         qDebug() << image_path;
         QPixmap pixmap(image_path);
+        if(!pixmap.isNull()){
         crestLabel->setPixmap(pixmap.scaled(128,128, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         gridLayout->addWidget(crestLabel,row,col);
+        }else{
+            crestLabel->setText(crest.m_name);
+            gridLayout->addWidget(crestLabel,row,col);
+        }
+
         //Connect call will go here...
+        connect(crestLabel, &ClickableLabel::clicked, this, [this,crest](){
+            //qDebug() << "Crest clicked: " << crest.m_name;
+            if(!crestPage){
+                crestPage = new CrestPage(crest,this);
+            }else{
+                delete crestPage; // Clean up old crest page
+                crestPage = new CrestPage(crest,this);
+            }
+            if(!crestPage->isVisible()){
+                crestPage->show();
+            }
+        });
 
         col++;
         if(col>=columns){

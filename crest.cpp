@@ -6,6 +6,11 @@
 #include<QDebug>
 
 std::vector<Crest> Crest::loadCrests(const QString& filePath){
+/*
+    This function creates all the crest objects immediatly, if I change this I must also change how I handle the crest page
+    I am thinking maybe not making them an actual object until the user clicks on the crest or the item
+    Or starts an actual build with said crest/item... Not too sure yet
+*/
     std::vector<Crest> crests;
     QFile file(filePath);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){

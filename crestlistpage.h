@@ -2,7 +2,7 @@
 #define CRESTLISTPAGE_H
 
 #include <QMainWindow>
-
+#include "crestpage.h"
 namespace Ui {
 class CrestListPage;
 }
@@ -17,6 +17,7 @@ public:
     void populateGrid();
 private:
     Ui::CrestListPage *ui;
+    CrestPage* crestPage = nullptr;
 };
 
 #endif // CRESTLISTPAGE_H

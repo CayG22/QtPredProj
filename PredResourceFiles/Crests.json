@@ -7,7 +7,7 @@
         "omnivamp": 0.04
     },
     {
-        "name" : "Saphir's Mantle",
+        "name" : "Saphirs Mantle",
         "image_path" : "C:/QT Projects/TestHeroPage/CrestImages/SaphirsMantle.jpg",
         "max_health" : 180,
         "physical_armor" : 8,
