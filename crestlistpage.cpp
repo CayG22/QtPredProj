@@ -67,9 +67,13 @@ void CrestListPage::populateGrid() {
     QWidget* gridWidget = new QWidget();
     QGridLayout* gridLayout = new QGridLayout(gridWidget);
 
-    for (const QString& crestName : crestNames) {
-        // Create a clickable label
-        ClickableLabel* crestLabel = new ClickableLabel();
+    for (const QString &crestName : crestNames) {
+        // Create a QWidget to hold both image and name
+        QWidget *crestWidget = new QWidget();
+        QVBoxLayout *verticalLayout = new QVBoxLayout(crestWidget);
+
+        // Create a clickable label for the image
+        ClickableLabel *crestLabel = new ClickableLabel();
         crestLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
         // Load image
@@ -77,12 +81,22 @@ void CrestListPage::populateGrid() {
         qDebug() << image_path;
         QPixmap pixmap(image_path);
         if (!pixmap.isNull()) {
-            crestLabel->setPixmap(pixmap.scaled(128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-            gridLayout->addWidget(crestLabel, row, col);
+            crestLabel->setPixmap(pixmap.scaled(128, 128, Qt::KeepAspectRatio,
+                                                Qt::SmoothTransformation));
         } else {
-            crestLabel->setText(crestName);
-            gridLayout->addWidget(crestLabel, row, col);
+            crestLabel->setText(crestName); // If no image, set the name as text
         }
+
+        // Add the clickable label for the image to the vertical layout
+        verticalLayout->addWidget(crestLabel);
+
+        // Create label for the crest name
+        QLabel *nameLabel = new QLabel(crestName);
+        nameLabel->setAlignment(Qt::AlignCenter);
+        verticalLayout->addWidget(nameLabel);
+
+        // Add the widget with image and name to the grid
+        gridLayout->addWidget(crestWidget, row, col);
 
         // Connect label click to action
         connect(crestLabel, &ClickableLabel::clicked, this, [this, crestName]() {

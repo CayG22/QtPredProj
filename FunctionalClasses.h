@@ -2,19 +2,22 @@
 #define FUNCTIONALCLASSES_H
 #include<QLabel>
 #include<QMouseEvent>
-
 #include "Hero.h"
 #include "Murdock.h"
-
 
 /*Handles Left mouse clicks for the hero labels*/
 class ClickableLabel: public QLabel{
     Q_OBJECT
 
 public:
-    explicit ClickableLabel(QWidget *parent = nullptr) : QLabel(parent){}
+    explicit ClickableLabel(QWidget *parent = nullptr) : QLabel(parent){
+        setAlignment(Qt::AlignCenter);
+        setStyleSheet("background-color:transparent");
+    }
+
 signals:
     void clicked();
+
 protected:
     void mousePressEvent(QMouseEvent *event) override{
         if(event->button() == Qt::LeftButton){
