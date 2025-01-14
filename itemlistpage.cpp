@@ -3,6 +3,11 @@
 #include<QVBoxLayout>
 #include<QLabel.h>
 #include<qdebug.h>
+#include<QFile>
+#include<QJsonDocument>
+#include<QJsonArray>
+#include<QJsonObject>
+
 #include "itemlistpage.h"
 #include "ui_itemlistpage.h"
 #include "item.h"
@@ -21,8 +26,39 @@ itemlistpage::~itemlistpage()
 }
 
 void itemlistpage::populateGrid(){
-    std::vector<Item> items = Item::loadItems(":/JSON/PredResourceFiles/Items.json");
+    //Path to JSON file
+    const QString filePath = ":/JSON/PredResourceFiles/Items.json";
 
+    //Vector to hold crest names
+    std::vector<QString> itemNames;
+
+    //Open and parse the JSON file
+    QFile file(filePath);
+    if(!file.open(QIODevice::ReadOnly|QIODevice::Text)){
+        qWarning() << "Could not open file: " << filePath;
+        return;
+    }
+
+    QByteArray data = file.readAll();
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+
+    if(!doc.isArray()){
+        qWarning() << "Invalid JSON format: expected an array.";
+        return;
+    }
+    QJsonArray itemArray = doc.array();
+    for(const QJsonValue& value : itemArray){
+        if(value.isObject()){
+            QJsonObject itemObject = value.toObject();
+            if(itemObject.contains("name") && itemObject["name"].isString()){
+                itemNames.push_back(itemObject["name"].toString());
+            }else{
+                qWarning() << "Crest object missing 'name' filed or it's not a string";
+            }
+        }else{
+            qWarning() << "Invalid crest entry format, expected an object";
+        }
+    }
     int row = 0, col = 0;
     const int columns = 5;
 
@@ -30,25 +66,41 @@ void itemlistpage::populateGrid(){
     QWidget* gridWidget = new QWidget();
     QGridLayout* gridLayout = new QGridLayout(gridWidget);
 
-    for(const Item& item: items){
-        //Create a clickable label
-        ClickableLabel* itemLabel = new ClickableLabel();
-        itemLabel->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
-        //TODO: ADD NAMES TO ALSO DISPLAY ON THIS PAGE
+    for (const QString &itemName : itemNames) {
+        // Create a QWidget to hold both image and name
+        QWidget *itemWidget = new QWidget();
+        QVBoxLayout *verticalLayout = new QVBoxLayout(itemWidget);
 
-        //Load image
-        QString image_path = Item::createImagePath(item.m_name);
+        // Create a clickable label for the image
+        ClickableLabel *itemLabel = new ClickableLabel();
+        itemLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+        // Load image
+        QString image_path = Item::createImagePath(itemName);
         qDebug() << image_path;
         QPixmap pixmap(image_path);
-        if(!pixmap.isNull() || pixmap.isNull()){
-        itemLabel->setPixmap(pixmap.scaled(128,128,Qt::KeepAspectRatio,Qt::SmoothTransformation));
-        gridLayout->addWidget(itemLabel,row,col);
-        }else{
-            itemLabel->setText(item.m_name);
-            gridLayout->addWidget(itemLabel,row,col);
+        if (!pixmap.isNull()) {
+            itemLabel->setPixmap(pixmap.scaled(128, 128, Qt::KeepAspectRatio,
+                                                Qt::SmoothTransformation));
+        } else {
+            itemLabel->setText(itemName); // If no image, set the name as text
         }
+
+        // Add the clickable label for the image to the vertical layout
+        verticalLayout->addWidget(itemLabel);
+
+        // Create label for the crest name
+        QLabel *nameLabel = new QLabel(itemName);
+        nameLabel->setAlignment(Qt::AlignCenter);
+        verticalLayout->addWidget(nameLabel);
+
+        // Add the widget with image and name to the grid
+        gridLayout->addWidget(itemWidget, row, col);
+
+        //Will add connect call here
+
         col++;
-        if(col>=columns){
+        if (col >= columns) {
             col = 0;
             row++;
         }
