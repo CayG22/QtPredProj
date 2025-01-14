@@ -1,6 +1,7 @@
 #ifndef CREST_H
 #define CREST_H
 #include<QString>
+#include<QMap>
 class Crest
 {
 public:
@@ -66,6 +67,7 @@ public:
 
     static std::vector<Crest> loadCrests(const QString& filePath);
     static QString createImagePath(const QString& name);
+
 };
 
 #endif // CREST_H

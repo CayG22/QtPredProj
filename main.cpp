@@ -1,3 +1,5 @@
+//This app is currently being made for Version 1.2
+//DONT CHANGE ANYTHING IN THE RESOURCES FILE, IT TAKES FOREVER TO BUILD...
 #include "HeroPage.h"
 #include "herolistpage.h"
 #include "crestlistpage.h"

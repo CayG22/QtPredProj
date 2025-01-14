@@ -1,4 +1,4 @@
-#include "crest.h"
+  #include "crest.h"
 #include<QFile>
 #include<QJsonDocument>
 #include<QJsonArray>
@@ -49,6 +49,7 @@ std::vector<Crest> Crest::loadCrests(const QString& filePath){
 QString Crest::createImagePath(const QString& name){
     QString non_const_copy = name;
     non_const_copy.remove(' ');
-    QString img_path = ":/images/CrestImages/" + name + ".jpg";
+    QString img_path = ":/images/CrestImages/" + non_const_copy + ".jpg";
     return img_path;
 }
+
