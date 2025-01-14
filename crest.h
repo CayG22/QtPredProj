@@ -65,7 +65,7 @@ public:
     double m_ability_haste;
     double m_movement_speed;
 
-    static std::vector<Crest> loadCrests(const QString& filePath);
+    static Crest loadFullCrestData(const QString& crestName);
     static QString createImagePath(const QString& name);
 
 };

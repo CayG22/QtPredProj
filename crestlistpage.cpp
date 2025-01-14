@@ -100,11 +100,14 @@ void CrestListPage::populateGrid() {
 
         // Connect label click to action
         connect(crestLabel, &ClickableLabel::clicked, this, [this, crestName]() {
+            Crest crestObj;
             if (!crestPage) {
-                crestPage = new CrestPage(Crest(crestName), this);
+                crestObj = Crest::loadFullCrestData(crestName);
+                crestPage = new CrestPage(crestObj, this);
             } else {
                 delete crestPage; // Clean up old crest page
-                crestPage = new CrestPage(Crest(crestName), this);
+                crestObj = Crest::loadFullCrestData(crestName);
+                crestPage = new CrestPage(crestObj, this);
             }
             if (!crestPage->isVisible()) {
                 crestPage->show();
