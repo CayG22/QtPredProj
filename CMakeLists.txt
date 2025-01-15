@@ -36,6 +36,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         item.h item.cpp
         itemlistpage.h itemlistpage.cpp itemlistpage.ui
         crestpage.h crestpage.cpp crestpage.ui
+        active.h active.cpp
 
 
 

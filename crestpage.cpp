@@ -6,6 +6,7 @@ CrestPage::CrestPage(Crest crest, QWidget *parent)
     , ui(new Ui::CrestPage), currentCrest(crest) //Init. with the passed in crest
 {
     ui->setupUi(this);
+
     QString image_path = ":/images/CrestImages/" + currentCrest.m_name + ".jpg";
     qDebug() << image_path;
     QPixmap pixmap(image_path);
@@ -14,7 +15,7 @@ CrestPage::CrestPage(Crest crest, QWidget *parent)
     ui->CrestName->setText(currentCrest.m_name);
     ui->CrestName->setAlignment(Qt::AlignCenter);
     ui->CrestName->setStyleSheet("QLabel{color:#6763A0;font-size:30px}");
-    this->setStyleSheet("background-color:#191923");
+    this->setStyleSheet("background-color:#191923;font-family:sans-serif");
     fillTable();
 }
 
@@ -26,7 +27,6 @@ CrestPage::~CrestPage()
 void CrestPage::fillTable(){
     ui->BuffTable->setColumnCount(2);
     ui->BuffTable->setHorizontalHeaderLabels({"Buff","Value"});
-
     QList<QPair<QString,QVariant>> buffs = {
         {"Physical Power", currentCrest.m_physical_power},
         {"Magical Power", currentCrest.m_magical_power},
@@ -84,6 +84,16 @@ void CrestPage::fillTable(){
     ui->BuffTable->resizeColumnsToContents();
     ui->BuffTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->BuffTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    displayActiveInfo();
+}
+void CrestPage::displayActiveInfo(){
+    QString activeName = currentCrest.m_active.active_name;
+    QString activeDesc = currentCrest.m_active.active_description;
+
+    ui->ActiveName->setText(activeName);
+    ui->ActiveName->setStyleSheet("color:#AF69AF;font-size:14px");
 
 
+    ui->ActiveDesc->setText(activeDesc);
+    ui->ActiveDesc->setStyleSheet("color:#A0A0A0;font-size:14px");
 }

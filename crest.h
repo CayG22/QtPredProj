@@ -1,5 +1,6 @@
 #ifndef CREST_H
 #define CREST_H
+#include "active.h"
 #include<QString>
 #include<QMap>
 class Crest
@@ -23,7 +24,8 @@ public:
         double health_regeneration = 0.0,
         double mana_regeneration = 0.0,
         double ability_haste = 0.0,
-        double movement_speed = 0.0
+        double movement_speed = 0.0,
+        const Active& active = Active() //Set default value to default Active value
         )
         : m_name(name),
         m_image_path(image_path),
@@ -42,7 +44,8 @@ public:
         m_health_regeneration(health_regeneration),
         m_mana_regeneration(mana_regeneration),
         m_ability_haste(ability_haste),
-        m_movement_speed(movement_speed)
+        m_movement_speed(movement_speed),
+        m_active(active)
     {
     }
 
@@ -64,6 +67,7 @@ public:
     double m_mana_regeneration;
     double m_ability_haste;
     double m_movement_speed;
+    Active m_active;
 
     static Crest loadFullCrestData(const QString& crestName);
     static QString createImagePath(const QString& name);

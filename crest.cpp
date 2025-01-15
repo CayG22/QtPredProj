@@ -1,4 +1,4 @@
-  #include "crest.h"
+#include "crest.h"
 #include<QFile>
 #include<QJsonDocument>
 #include<QJsonArray>
@@ -19,6 +19,9 @@ Crest Crest::loadFullCrestData(const QString& crestName) {
     for (const QJsonValue& value : crestArray) {
         QJsonObject obj = value.toObject();
         if (obj["name"].toString() == crestName) {
+            //Extract active object sepearately
+            QJsonObject activeObj = obj["active"].toObject();
+            Active active(activeObj["active_name"].toString(),activeObj["active_description"].toString());
             return Crest(
                 obj["name"].toString(),
                 obj["image_path"].toString(),
@@ -37,7 +40,8 @@ Crest Crest::loadFullCrestData(const QString& crestName) {
                 obj["health_regeneration"].toDouble(),
                 obj["mana_regeneration"].toDouble(),
                 obj["ability_haste"].toDouble(),
-                obj["movement_speed"].toDouble()
+                obj["movement_speed"].toDouble(),
+                active
                 );
         }
     }

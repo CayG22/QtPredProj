@@ -1,21 +1,19 @@
-#include<QLabel>
-#include<QScrollArea>
-#include<QVBoxLayout>
-#include<QLabel.h>
+#include "crestlistpage.h"
+#include "ui_crestlistpage.h"
+#include "FunctionalClasses.h"
 #include<QFile>
 #include<QJsonDocument>
 #include<QJsonArray>
 #include<QJsonObject>
+#include <qscrollarea.h>
 
-#include "crestlistpage.h"
-#include "ui_crestlistpage.h"
-#include "crest.h"
-#include "FunctionalClasses.h"
 CrestListPage::CrestListPage(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::CrestListPage)
 {
     ui->setupUi(this);
+    this->setStyleSheet("background-color:#1e1e28");
+    //setUpSearchBar();
     populateGrid();
 }
 
@@ -25,6 +23,7 @@ CrestListPage::~CrestListPage()
 }
 
 void CrestListPage::populateGrid() {
+
     // Path to the JSON file
     const QString filePath = ":/JSON/PredResourceFiles/Crests.json";
 
@@ -62,11 +61,10 @@ void CrestListPage::populateGrid() {
 
     // Grid setup
     int row = 0, col = 0;
-    const int columns = 5;
+    const int columns = 4;
 
     QWidget* gridWidget = new QWidget();
     QGridLayout* gridLayout = new QGridLayout(gridWidget);
-
     for (const QString &crestName : crestNames) {
         // Create a QWidget to hold both image and name
         QWidget *crestWidget = new QWidget();
@@ -74,7 +72,7 @@ void CrestListPage::populateGrid() {
 
         // Create a clickable label for the image
         ClickableLabel *crestLabel = new ClickableLabel();
-        crestLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        crestLabel->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Expanding);
 
         // Load image
         QString image_path = Crest::createImagePath(crestName);
@@ -86,7 +84,6 @@ void CrestListPage::populateGrid() {
         } else {
             crestLabel->setText(crestName); // If no image, set the name as text
         }
-
         // Add the clickable label for the image to the vertical layout
         verticalLayout->addWidget(crestLabel);
 
@@ -94,7 +91,7 @@ void CrestListPage::populateGrid() {
         QLabel *nameLabel = new QLabel(crestName);
         nameLabel->setAlignment(Qt::AlignCenter);
         verticalLayout->addWidget(nameLabel);
-
+        nameLabel->setStyleSheet("font-family:sans-serif;color:#a0a0a0;font-size:20px");
         // Add the widget with image and name to the grid
         gridLayout->addWidget(crestWidget, row, col);
 
@@ -125,7 +122,6 @@ void CrestListPage::populateGrid() {
     QScrollArea* scrollArea = new QScrollArea(this);
     scrollArea->setWidget(gridWidget);
     scrollArea->setWidgetResizable(true);
-
     // Layout setup
     QVBoxLayout* mainLayout = new QVBoxLayout(this);
     mainLayout->addWidget(scrollArea);

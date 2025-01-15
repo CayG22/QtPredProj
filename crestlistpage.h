@@ -15,9 +15,11 @@ public:
     explicit CrestListPage(QWidget *parent = nullptr);
     ~CrestListPage();
     void populateGrid();
+    void setUpSearchBar();
 private:
     Ui::CrestListPage *ui;
     CrestPage* crestPage = nullptr;
 };
 
 #endif // CRESTLISTPAGE_H
+

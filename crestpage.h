@@ -16,7 +16,7 @@ public:
     ~CrestPage();
     void setUpTable();
     void fillTable();
-
+    void displayActiveInfo();
 private:
     Ui::CrestPage *ui;
 
