@@ -58,9 +58,10 @@ public:
         lineEdit = new QLineEdit(this);
         searchButton = new QPushButton("Search", this);
 
-        // Set placeholder text
+        //Stylize searchBar
+        lineEdit->setStyleSheet("background-color:#14141E; color:#A0A0A0 ");
         lineEdit->setPlaceholderText("Type to search...");
-
+        searchButton->setStyleSheet("background-color:#161620;color:#9B9BE1");
         // Create layout
         QHBoxLayout *layout = new QHBoxLayout(this);
         layout->addWidget(lineEdit);

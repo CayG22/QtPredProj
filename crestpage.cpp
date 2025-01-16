@@ -89,11 +89,13 @@ void CrestPage::fillTable(){
 void CrestPage::displayActiveInfo(){
     QString activeName = currentCrest.m_active.active_name;
     QString activeDesc = currentCrest.m_active.active_description;
-    int active_cooldown = currentCrest.m_active.active_cooldown;
+    QString active_cooldown = QString::number(currentCrest.m_active.active_cooldown);
 
     ui->ActiveName->setText(activeName);
     ui->ActiveName->setStyleSheet("color:#AF69AF;font-size:14px");
 
+    ui->ActiveCooldown->setText("CD: " + active_cooldown + "s");
+    ui->ActiveCooldown->setStyleSheet("color:#AF8769;font-size:14px");
 
     ui->ActiveDesc->setText(activeDesc);
     ui->ActiveDesc->setStyleSheet("color:#A0A0A0;font-size:14px");

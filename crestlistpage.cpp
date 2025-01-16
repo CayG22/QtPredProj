@@ -7,13 +7,16 @@
 #include<QJsonObject>
 #include <qscrollarea.h>
 
+
 CrestListPage::CrestListPage(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::CrestListPage)
 {
     ui->setupUi(this);
+
     this->setStyleSheet("background-color:#1e1e28");
-    //setUpSearchBar();
+
+    loadJSON();
     populateGrid();
 }
 
@@ -23,41 +26,8 @@ CrestListPage::~CrestListPage()
 }
 
 void CrestListPage::populateGrid() {
-
-    // Path to the JSON file
-    const QString filePath = ":/JSON/PredResourceFiles/Crests.json";
-
-    // Vector to hold crest names
-    std::vector<QString> crestNames;
-
-    // Open and parse the JSON file
-    QFile file(filePath);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        qWarning() << "Could not open file:" << filePath;
-        return;
-    }
-
-    QByteArray data = file.readAll();
-    QJsonDocument doc = QJsonDocument::fromJson(data);
-
-    if (!doc.isArray()) {
-        qWarning() << "Invalid JSON format: expected an array.";
-        return;
-    }
-
-    QJsonArray crestArray = doc.array();
-    for (const QJsonValue& value : crestArray) {
-        if (value.isObject()) {
-            QJsonObject crestObject = value.toObject();
-            if (crestObject.contains("name") && crestObject["name"].isString()) {
-                crestNames.push_back(crestObject["name"].toString());
-            } else {
-                qWarning() << "Crest object missing 'name' field or it's not a string.";
-            }
-        } else {
-            qWarning() << "Invalid crest entry format, expected an object.";
-        }
-    }
+    //Ensure filteredCrestNames is used instead of crestNames
+    const std::vector<QString> &namesToDisplay = filteredCrestNames.empty() ? crestNames:filteredCrestNames;
 
     // Grid setup
     int row = 0, col = 0;
@@ -84,6 +54,7 @@ void CrestListPage::populateGrid() {
         } else {
             crestLabel->setText(crestName); // If no image, set the name as text
         }
+
         // Add the clickable label for the image to the vertical layout
         verticalLayout->addWidget(crestLabel);
 
@@ -92,6 +63,7 @@ void CrestListPage::populateGrid() {
         nameLabel->setAlignment(Qt::AlignCenter);
         verticalLayout->addWidget(nameLabel);
         nameLabel->setStyleSheet("font-family:sans-serif;color:#a0a0a0;font-size:20px");
+
         // Add the widget with image and name to the grid
         gridLayout->addWidget(crestWidget, row, col);
 
@@ -110,7 +82,7 @@ void CrestListPage::populateGrid() {
                 crestPage->show();
             }
         });
-
+        //Loop through the rest of the grid
         col++;
         if (col >= columns) {
             col = 0;
@@ -129,6 +101,52 @@ void CrestListPage::populateGrid() {
     QWidget* centralWidget = new QWidget(this);
     centralWidget->setLayout(mainLayout);
     setCentralWidget(centralWidget);
+
+    SearchBar* searchBar = new SearchBar(this);
+    connect(searchBar,&SearchBar::searchButtonClicked,this,&CrestListPage::search);
+    qDebug() << filteredCrestNames;
+    mainLayout->addWidget(searchBar);
+
 }
 
+void CrestListPage::loadJSON(){
+    // Path to the JSON file
+    const QString filePath = ":/JSON/PredResourceFiles/Crests.json";
 
+    // Open and parse the JSON file
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qWarning() << "Could not open file:" << filePath;
+    }
+
+    QByteArray data = file.readAll();
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+
+    if (!doc.isArray()) {
+        qWarning() << "Invalid JSON format: expected an array.";
+    }
+
+    QJsonArray crestArray = doc.array();
+    for (const QJsonValue& value : crestArray) {
+        if (value.isObject()) {
+            QJsonObject crestObject = value.toObject();
+            if (crestObject.contains("name") && crestObject["name"].isString()) {
+                crestNames.push_back(crestObject["name"].toString());
+            } else {
+                qWarning() << "Crest object missing 'name' field or it's not a string.";
+            }
+        } else {
+            qWarning() << "Invalid crest entry format, expected an object.";
+        }
+    }
+
+}
+void CrestListPage::search(const QString& searchText){
+    filteredCrestNames.clear(); //Clear previous results
+    for(const QString& name:crestNames){
+        if(name.contains(searchText,Qt::CaseInsensitive)){
+            filteredCrestNames.push_back(name);
+        }
+    }
+    populateGrid();
+}
