@@ -104,7 +104,7 @@ void CrestListPage::populateGrid() {
 
     SearchBar* searchBar = new SearchBar(this);
     connect(searchBar,&SearchBar::searchButtonClicked,this,&CrestListPage::search);
-    qDebug() << filteredCrestNames;
+
     mainLayout->addWidget(searchBar);
 
 }

@@ -16,6 +16,8 @@ public:
     explicit ClickableLabel(QWidget *parent = nullptr) : QLabel(parent){
         setAlignment(Qt::AlignCenter);
         setStyleSheet("background-color:#191923;border-radius:8px");
+        setSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::Expanding);
+
     }
 
 signals:

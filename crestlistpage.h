@@ -2,7 +2,10 @@
 #define CRESTLISTPAGE_H
 
 #include <QMainWindow>
+#include<QScrollArea>
+#include<QLabel>
 #include "crestpage.h"
+#include "FunctionalClasses.h"
 namespace Ui {
 class CrestListPage;
 }
@@ -21,6 +24,9 @@ public:
 private:
     Ui::CrestListPage *ui;
     CrestPage* crestPage = nullptr;
+    ClickableLabel* crestLabel = nullptr;
+    QScrollArea* scrollArea = nullptr;
+    QLabel* nameLabel = nullptr;
     std::vector<QString> crestNames = {};
     std::vector<QString> filteredCrestNames;
 
