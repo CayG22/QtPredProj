@@ -4,11 +4,11 @@
 class Active
 {
 public:
-    Active(const QString& name = "", const QString& description = "")
-        : active_name(name),active_description(description){}
+    Active(const QString& name = "", const QString& description = "", const int cooldown = 0)
+        : active_name(name),active_description(description),active_cooldown(cooldown){}
     QString active_name;
     QString active_description;
-
+    int active_cooldown;
 };
 
 #endif // ACTIVE_H

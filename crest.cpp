@@ -21,7 +21,7 @@ Crest Crest::loadFullCrestData(const QString& crestName) {
         if (obj["name"].toString() == crestName) {
             //Extract active object sepearately
             QJsonObject activeObj = obj["active"].toObject();
-            Active active(activeObj["active_name"].toString(),activeObj["active_description"].toString());
+            Active active(activeObj["active_name"].toString(),activeObj["active_description"].toString(),activeObj["active_cooldown"].toInt());
             return Crest(
                 obj["name"].toString(),
                 obj["image_path"].toString(),

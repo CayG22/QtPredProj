@@ -8,7 +8,8 @@
         "active":
         {
           "active_name": "Thunder Cleave",
-          "active_description":"-Deal 70(+40% P) damage in an area around you\n-On Hero hit, heal(+35% P)(+8% H)\n-Subsequent Hero hits heal for 50% effectiveness."
+          "active_description":"-Deal 70(+40% P) damage in an area around you\n-On Hero hit, heal(+35% P)(+8% H)\n-Subsequent Hero hits heal for 50% effectiveness.",
+          "active_cooldown":24
         }
     },
     {
