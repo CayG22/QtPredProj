@@ -31,12 +31,9 @@ private:
     Ui::UpdatedCrestListPage *ui;
     CrestPage* crestPage = nullptr;
     ClickableLabel* crestLabel = nullptr;
-    QScrollArea* scrollArea = nullptr;
-    QVBoxLayout* mainLayout = nullptr;
-    QWidget* centralWidget = nullptr;
-    QWidget* gridWidget = nullptr;
-    QGridLayout* gridLayout = nullptr;
-    SearchBar* searchBar = nullptr;
+    SearchBar* searchBar;
+    QScrollArea* scrollArea;
+    QVBoxLayout* mainLayout;
     std::vector<QString> crestNames = {};
     std::vector<QString> filteredCrestNames = {};
 };

@@ -8,13 +8,24 @@ UpdatedCrestListPage::UpdatedCrestListPage(QWidget *parent)
 {
     ui->setupUi(this);
     this->setStyleSheet("background-color:#1e1e28");
-    scrollArea = new QScrollArea(this);
-    mainLayout = new QVBoxLayout(this);
-    centralWidget = new QWidget(this);
+
     searchBar = new SearchBar(this);
-    connect(searchBar,&SearchBar::searchButtonClicked,this,&UpdatedCrestListPage::search);
 
+    connect(searchBar, &SearchBar::searchButtonClicked, this, &UpdatedCrestListPage::search);
 
+    // Create main layout and set it only once
+    mainLayout = new QVBoxLayout();
+    mainLayout->addWidget(searchBar); // Add search bar at the top
+
+    scrollArea = new QScrollArea(this);
+    scrollArea->setWidgetResizable(true);
+    mainLayout->addWidget(scrollArea); // Add scroll area below search bar
+
+    QWidget* centralWidget = new QWidget(this);
+    centralWidget->setLayout(mainLayout);
+    setCentralWidget(centralWidget);
+
+    // Load data and populate grid
     loadJSON();
     populateGrid();
 }
@@ -34,60 +45,47 @@ void UpdatedCrestListPage::search(const QString& searchText){
     populateGrid();
 }
 
-void UpdatedCrestListPage::populateGrid(){
-    // Remove old items from the grid layout
-    QLayout *layout = gridLayout;
-    if (layout) {
-        QLayoutItem *item;
-        while ((item = layout->takeAt(0)) != nullptr) {
-            QWidget *widget = item->widget();
-            if (widget) {
-                widget->deleteLater();  // Delete the widget to free memory
-            }
-            delete item;  // Remove the layout item
-        }
-    }
+void UpdatedCrestListPage::populateGrid() {
+    const std::vector<QString>& namesToDisplay = filteredCrestNames.empty() ? crestNames : filteredCrestNames;
 
-    //Make sure filteredCrestNames is being used
-    const std::vector<QString> &namesToDisplay = filteredCrestNames.empty() ? crestNames:filteredCrestNames;
-    qDebug() << namesToDisplay;
-    //Grid layout
+    // Create a new grid widget and layout
+    QWidget* gridWidget = new QWidget();
+    QGridLayout* gridLayout = new QGridLayout(gridWidget);
+
     int row = 0, col = 0;
     const int columns = 4;
-    for(const QString& crestName:namesToDisplay){
+    for (const QString& crestName : namesToDisplay) {
         QString image_path = Crest::createImagePath(crestName);
         QPixmap pixmap(image_path);
+
         QWidget* crestWidget = new QWidget();
         QVBoxLayout* crestLayout = new QVBoxLayout(crestWidget);
         ClickableLabel* crestLabel = new ClickableLabel();
         QLabel* crestLabelName = new QLabel(crestName);
 
-        if(!pixmap.isNull()){
-            crestLabel->setPixmap(pixmap.scaled(128,128,Qt::KeepAspectRatio,Qt::SmoothTransformation));
-        }else{
+        if (!pixmap.isNull()) {
+            crestLabel->setPixmap(pixmap.scaled(128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        } else {
             crestLabel->setText(crestName);
         }
 
         crestLayout->addWidget(crestLabel);
         crestLayout->addWidget(crestLabelName);
-
         crestWidget->setLayout(crestLayout);
-        gridLayout->addWidget(crestWidget,row,col);
 
-        setUpCrestClick(crestLabel,crestName);
+        gridLayout->addWidget(crestWidget, row, col);
+
+        setUpCrestClick(crestLabel, crestName);
 
         col++;
-        if(col>=columns){
+        if (col >= columns) {
             col = 0;
             row++;
         }
     }
 
+    // Update the scroll area's widget
     scrollArea->setWidget(gridWidget);
-    scrollArea->setWidgetResizable(true);
-    mainLayout->addWidget(scrollArea);
-    setCentralWidget(centralWidget);
-    mainLayout->addWidget(searchBar);
 }
 
 void UpdatedCrestListPage::loadJSON(){
