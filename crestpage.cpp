@@ -7,15 +7,19 @@ CrestPage::CrestPage(Crest crest, QWidget *parent)
 {
     ui->setupUi(this);
 
+    currentCrest.m_name.remove(" ");
     QString image_path = ":/images/CrestImages/" + currentCrest.m_name + ".jpg";
     qDebug() << image_path;
     QPixmap pixmap(image_path);
+
     ui->CrestImage->setPixmap(pixmap);
     ui->CrestImage->setAlignment(Qt::AlignCenter);
     ui->CrestName->setText(currentCrest.m_name);
     ui->CrestName->setAlignment(Qt::AlignCenter);
     ui->CrestName->setStyleSheet("QLabel{color:#6763A0;font-size:30px}");
+    //ui->CrestImage->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
     this->setStyleSheet("background-color:#191923;font-family:sans-serif");
+
     fillTable();
 }
 
@@ -97,6 +101,35 @@ void CrestPage::displayActiveInfo(){
     ui->ActiveCooldown->setText("CD: " + active_cooldown + "s");
     ui->ActiveCooldown->setStyleSheet("color:#AF8769;font-size:14px");
 
-    ui->ActiveDesc->setText(activeDesc);
+    ui->ActiveDesc->setTextFormat(Qt::RichText);
+    ui->ActiveDesc->setText(formatText(activeDesc));
     ui->ActiveDesc->setStyleSheet("color:#A0A0A0;font-size:14px");
+}
+QString CrestPage::formatText(QString& inputText){
+    QStringList splitText = inputText.split('-');
+    QStringList modifiedTextList;
+    QStringList modifiedTextList2;
+    QRegularExpression Pregex("\\(\\+(\\d+%\\sP)\\)");
+    QRegularExpression Hregex("\\(\\+(\\d+%\\sH)\\)");
+    //Gonna have to make this way more efficient and dynamic... Works for now
+    for(const QString& word:splitText){
+        QRegularExpressionMatch Pmatch = Pregex.match(word);
+        QString PmatchedText = Pmatch.captured(0);
+        QString modifiedText = word;
+
+
+        modifiedText.replace(Pmatch.capturedStart(0),PmatchedText.length(),"<span style = 'color:#af6969'> " + PmatchedText + " </span>");
+        modifiedTextList.append(modifiedText);
+    }
+    for(const QString& word:modifiedTextList){
+        QRegularExpressionMatch Hmatch = Hregex.match(word);
+        QString HmatchedText = Hmatch.captured(0);
+        QString modifiedText = word;
+        modifiedText.replace(Hmatch.capturedStart(0),HmatchedText.length(),"<span style = 'color:#69af69'> " + HmatchedText + " </span>");
+        modifiedTextList2.append(modifiedText);
+    }
+    modifiedTextList2.removeAll("");
+    QString finalString = modifiedTextList2.join("<br/>");
+    qDebug() << finalString;
+    return finalString;
 }

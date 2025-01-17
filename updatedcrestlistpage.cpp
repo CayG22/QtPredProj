@@ -53,7 +53,7 @@ void UpdatedCrestListPage::populateGrid() {
     QGridLayout* gridLayout = new QGridLayout(gridWidget);
 
     int row = 0, col = 0;
-    const int columns = 4;
+    const int columns = 6;
     for (const QString& crestName : namesToDisplay) {
         QString image_path = Crest::createImagePath(crestName);
         QPixmap pixmap(image_path);
@@ -61,8 +61,10 @@ void UpdatedCrestListPage::populateGrid() {
         QWidget* crestWidget = new QWidget();
         QVBoxLayout* crestLayout = new QVBoxLayout(crestWidget);
         ClickableLabel* crestLabel = new ClickableLabel();
-        QLabel* crestLabelName = new QLabel(crestName);
 
+        QLabel* crestLabelName = new QLabel(crestName);
+        crestLabelName->setStyleSheet("font-family:sans-serif;color:#a0a0a0;font-size:20px");
+        crestLabelName->setAlignment(Qt::AlignCenter);
         if (!pixmap.isNull()) {
             crestLabel->setPixmap(pixmap.scaled(128, 128, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         } else {

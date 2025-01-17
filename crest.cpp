@@ -51,6 +51,7 @@ Crest Crest::loadFullCrestData(const QString& crestName) {
 QString Crest::createImagePath(const QString& name){
     QString non_const_copy = name;
     non_const_copy.remove(' ');
+    qDebug() << non_const_copy;
     QString img_path = ":/images/CrestImages/" + non_const_copy + ".jpg";
     return img_path;
 }

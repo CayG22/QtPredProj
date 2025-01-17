@@ -2,6 +2,7 @@
 #define CRESTPAGE_H
 
 #include <QMainWindow>
+#include<QTextDocument>
 #include "crest.h"
 namespace Ui {
 class CrestPage;
@@ -17,6 +18,7 @@ public:
     void setUpTable();
     void fillTable();
     void displayActiveInfo();
+    QString formatText(QString& inputText);
 private:
     Ui::CrestPage *ui;
 
