@@ -8,13 +8,12 @@ UpdatedCrestListPage::UpdatedCrestListPage(QWidget *parent)
 {
     ui->setupUi(this);
     this->setStyleSheet("background-color:#1e1e28");
-    ui->scrollArea->setWidgetResizable(true);
-    this->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
-    ui->verticalLayoutWidget->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
-
-    SearchBar* searchBar = new SearchBar(this);
+    scrollArea = new QScrollArea(this);
+    mainLayout = new QVBoxLayout(this);
+    centralWidget = new QWidget(this);
+    searchBar = new SearchBar(this);
     connect(searchBar,&SearchBar::searchButtonClicked,this,&UpdatedCrestListPage::search);
-    ui->verticalLayout->addWidget(searchBar);
+
 
     loadJSON();
     populateGrid();
@@ -37,7 +36,7 @@ void UpdatedCrestListPage::search(const QString& searchText){
 
 void UpdatedCrestListPage::populateGrid(){
     // Remove old items from the grid layout
-    QLayout *layout = ui->gridLayout;
+    QLayout *layout = gridLayout;
     if (layout) {
         QLayoutItem *item;
         while ((item = layout->takeAt(0)) != nullptr) {
@@ -73,7 +72,7 @@ void UpdatedCrestListPage::populateGrid(){
         crestLayout->addWidget(crestLabelName);
 
         crestWidget->setLayout(crestLayout);
-        ui->gridLayout->addWidget(crestWidget,row,col);
+        gridLayout->addWidget(crestWidget,row,col);
 
         setUpCrestClick(crestLabel,crestName);
 
@@ -83,6 +82,12 @@ void UpdatedCrestListPage::populateGrid(){
             row++;
         }
     }
+
+    scrollArea->setWidget(gridWidget);
+    scrollArea->setWidgetResizable(true);
+    mainLayout->addWidget(scrollArea);
+    setCentralWidget(centralWidget);
+    mainLayout->addWidget(searchBar);
 }
 
 void UpdatedCrestListPage::loadJSON(){

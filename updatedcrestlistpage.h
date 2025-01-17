@@ -32,6 +32,11 @@ private:
     CrestPage* crestPage = nullptr;
     ClickableLabel* crestLabel = nullptr;
     QScrollArea* scrollArea = nullptr;
+    QVBoxLayout* mainLayout = nullptr;
+    QWidget* centralWidget = nullptr;
+    QWidget* gridWidget = nullptr;
+    QGridLayout* gridLayout = nullptr;
+    SearchBar* searchBar = nullptr;
     std::vector<QString> crestNames = {};
     std::vector<QString> filteredCrestNames = {};
 };

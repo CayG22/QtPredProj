@@ -35,7 +35,7 @@ void CrestListPage::populateGrid() {
 
     QWidget* gridWidget = new QWidget();
     QGridLayout* gridLayout = new QGridLayout(gridWidget);
-    for (const QString &crestName : crestNames) {
+    for (const QString &crestName : namesToDisplay) {
         // Create a QWidget to hold both image and name
         QWidget *crestWidget = new QWidget();
         QVBoxLayout *verticalLayout = new QVBoxLayout(crestWidget);
